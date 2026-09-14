@@ -21,11 +21,17 @@ public class EpamClientWorkTest extends TestCase {
 
     @Override
     protected void tearDown() {
+        closeBrowser();
+    }
+
+    private void closeBrowser() {
         if (browser != null) {
             browser.close();
+            browser = null;
         }
         if (playwright != null) {
             playwright.close();
+            playwright = null;
         }
     }
 
@@ -38,7 +44,7 @@ public class EpamClientWorkTest extends TestCase {
             assertTrue(page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
                     new Page.GetByRoleOptions().setName("Client Work")).isVisible());
         } finally {
-            tearDown();
+            closeBrowser();
         }
     }
 }
